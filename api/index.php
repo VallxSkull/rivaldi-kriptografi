@@ -1,124 +1,99 @@
+<?php
+session_start();
+$current_page = 'beranda';
+?>
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-    <title>Kalkulator FPB Euclidean</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #EEEEEE;
-        }
-        .container {
-            width: 800px;
-            margin: 150px auto;
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        h2 {
-            text-align: center;
-            color: #1F6F5F;
-        }
-        label {
-            color: #1F6F5F;
-            font-weight: bold;
-        }
-        input {
-            width: 100%;
-            padding: 8px;
-            margin: 8px 0 15px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            background: #2FA084;
-            border: none;
-            color: white;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        button:hover {
-            background: #1F6F5F;
-        }
-        .hasil {
-            margin-top: 20px;
-            padding: 15px;
-            background: #EEEEEE;
-            border-left: 5px solid #2FA084;
-            border-radius: 8px;
-        }
-        .proses {
-            margin-top: 10px;
-            font-size: 14px;
-            color: #333;
-        }
-        .relatif {
-            color: #2FA084;
-            font-weight: bold;
-        }
-        .tidak {
-            color: red;
-            font-weight: bold;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beranda | Tugas Kriptografi</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<!-- Navigasi -->
+<nav class="nav-bar">
+    <a href="index.php" class="active">🏠 Beranda</a>
+    <a href="kalkulator-fpb.php">🧮 Kalkulator FPB</a>
+    <a href="riwayat.php">📋 Riwayat</a>
+    <a href="tentang.php">ℹ️ Tentang</a>
+    <a href="simulasi-rsa.php">📬 Simulasi RSA</a>
+    <a href="xor-cipher.php">🔐 XOR Cipher</a>
+    <a href="caesar-vigenere.php">🔡 Caesar & Vigenère</a>
+</nav>
+
+<!-- Konten Utama -->
 <div class="container">
-    <h2>Kalkulator FPB</h2>
+    <h1> Kriptografi Task</h1>
+    <p class="subtitle">Kumpulan Tugas pembelajaran Kriptografi</p>
 
-    <form method="POST">
-        <label>Angka 1 (A)</label>
-        <input type="number" name="a" required>
+    <!-- Grid Task Cards -->
+    <div class="task-grid">
+        
+        <!-- Card: Kalkulator FPB -->
+        <a href="kalkulator-fpb.php" class="task-card">
+            <span class="icon">🧮</span>
+            <span class="card-title">Kalkulator FPB</span>
+            <span class="card-desc">Hitung FPB dengan algoritma Euclidean</span>
+        </a>
 
-        <label>Angka 2 (B)</label>
-        <input type="number" name="b" required>
+        <!-- Card: Riwayat Perhitungan -->
+        <a href="riwayat.php" class="task-card">
+            <span class="icon">📋</span>
+            <span class="card-title">Riwayat</span>
+            <span class="card-desc">Lihat riwayat perhitungan FPB</span>
+        </a>
 
-        <button type="submit">Hitung FPB</button>
-    </form>
+        <!-- Card: Tentang Algoritma -->
+        <a href="tentang.php" class="task-card">
+            <span class="icon">ℹ️</span>
+            <span class="card-title">Tentang</span>
+            <span class="card-desc">Apa itu algoritma Euclidean?</span>
+        </a>
+        <!-- Card: Simulasi RSA -->
+        <a href="simulasi-rsa.php" class="task-card">
+            <span class="icon">📬</span>
+            <span class="card-title">Simulasi RSA</span>
+            <span class="card-desc">Kirim surat rahasia dengan enkripsi RSA</span>
+        </a>
+        <!-- Card: XOR Cipher -->
+        <a href="xor-cipher.php" class="task-card">
+            <span class="icon">🔐</span>
+            <span class="card-title">XOR Cipher</span>
+            <span class="card-desc">Enkripsi & dekripsi berbasis XOR</span>
+        </a>
+        <!-- Card: Caesar & Vigenère Cipher -->
+        <a href="caesar-vigenere.php" class="task-card">
+            <span class="icon">🔡</span>
+            <span class="card-title">Caesar & Vigenère</span>
+            <span class="card-desc">Enkripsi klasik Caesar & Vigenère</span>
+        </a>
+    </div>
 
-    <?php
-    function fpb($m, $n, &$langkah) {
-        while ($n != 0) {
-            $kali = intdiv($m, $n);
-            $sisa = $m % $n;
+    <!-- Info Session -->
+    <?php if (!empty($_SESSION['history'])): ?>
+    <div class="history">
+        <h3>📌 Riwayat Terakhir</h3>
+        <ul>
+            <?php 
+            $recent = array_slice(array_reverse($_SESSION['history']), 0, 3);
+            foreach ($recent as $item): 
+            ?>
+                <li>
+                    <span>FPB(<?= $item['a'] ?>, <?= $item['b'] ?>) = <b><?= $item['fpb'] ?></b></span>
+                    <small><?= $item['waktu'] ?></small>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <?php endif; ?>
 
-            $langkah[] = "$m = $kali × $n + $sisa";
-
-            $m = $n;
-            $n = $sisa;
-        }
-        return $m;
-    }
-
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $a = $_POST['a'];
-        $b = $_POST['b'];
-
-        $langkah = [];
-        $hasil = fpb($a, $b, $langkah);
-
-        echo "<div class='hasil'>";
-        echo "FPB dari <b>$a</b> dan <b>$b</b> adalah: <b>$hasil</b><br><br>";
-
-        echo "<div class='proses'><b>Proses:</b><br>";
-        foreach ($langkah as $step) {
-            echo "$step<br>";
-        }
-        echo "</div><br>";
-
-        if ($hasil == 1) {
-            echo "<span class='relatif'>Keterangan: RELATIF PRIMA</span>";
-        } else {
-            echo "<span class='tidak'>Keterangan: TIDAK RELATIF PRIMA</span>";
-        }
-
-        echo "</div>";
-    }
-    ?>
+    <!-- Creator -->
+    <div class="creator">
+        <p><strong>Creator:</strong> Rivaldi (231220056)</p>
+        <p>Dibuat untuk memenuhi tugas Kriptografi</p>
+    </div>
 </div>
 
 </body>
