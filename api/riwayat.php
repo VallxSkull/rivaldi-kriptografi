@@ -28,6 +28,7 @@ $current_page = 'riwayat';
     <a href="simulasi-rsa.php">📬 Simulasi RSA</a>
     <a href="xor-cipher.php">🔐 XOR Cipher</a>
     <a href="caesar-vigenere.php">🔡 Caesar & Vigenère</a>
+    <a href="verifikator-dokumen.php">🛡️ Verifikator Dokumen</a>
 </nav>
 
 <div class="container">

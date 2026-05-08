@@ -21,6 +21,7 @@ $current_page = 'beranda';
     <a href="simulasi-rsa.php">📬 Simulasi RSA</a>
     <a href="xor-cipher.php">🔐 XOR Cipher</a>
     <a href="caesar-vigenere.php">🔡 Caesar & Vigenère</a>
+    <a href="verifikator-dokumen.php">🛡️ Verifikator Dokumen</a>
 </nav>
 
 <!-- Konten Utama -->
@@ -68,6 +69,12 @@ $current_page = 'beranda';
             <span class="icon">🔡</span>
             <span class="card-title">Caesar & Vigenère</span>
             <span class="card-desc">Enkripsi klasik Caesar & Vigenère</span>
+        </a>
+        <!-- Card: Verifikator Dokumen -->
+        <a href="verifikator-dokumen.php" class="task-card">
+            <span class="icon">🛡️</span>
+            <span class="card-title">Verifikator Dokumen</span>
+            <span class="card-desc">Digital signature, sign & verify</span>
         </a>
     </div>
 

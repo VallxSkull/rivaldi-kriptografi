@@ -101,6 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['proses'])) {
     <a href="simulasi-rsa.php">📬 Simulasi RSA</a>
     <a href="xor-cipher.php" class="active">🔐 XOR Cipher</a>
     <a href="caesar-vigenere.php">🔡 Caesar & Vigenère</a>
+    <a href="verifikator-dokumen.php">🛡️ Verifikator Dokumen</a>
     
 </nav>
 
